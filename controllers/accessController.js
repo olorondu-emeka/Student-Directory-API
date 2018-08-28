@@ -1,13 +1,16 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 var studentModel = require('../models/student');
 
 exports.getStudent = async(req, res) => {
     const theStudent = await studentModel.findById(req.params.id);
-    res.status(200).json({
-        student: theStudent
-    });
+    console.log(req.decoded);
+        res.status(200).json({
+            student: theStudent     
+        });
+    
 };
 
 exports.regStudent = async(req, res) => {
@@ -49,10 +52,23 @@ exports.loginStudent = async(req, res) => {
     if (theUser !== null){
         const match = await bcrypt.compare(userPassword, theUser.credentials.password);
         if (match) {
+            //generate a json web token
+            const theToken = jwt.sign({
+                matricNo: theUser.credentials.matricNo,
+                _id: theUser._id 
+            }, 
+                process.env.JWT_KEY,
+            {
+                expiresIn: "1h"
+            });
+
+        
+            //send back a response
             res.status(200).json({
                 message: 'Login successful',
                 authorized: true,
-                user: theUser
+                user: theUser,
+                token: theToken 
             });
         }
 
@@ -70,5 +86,4 @@ exports.loginStudent = async(req, res) => {
         });
     }
 
-    console.log(theUser);
 };
