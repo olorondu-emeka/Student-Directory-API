@@ -14,7 +14,8 @@ var credSchema = new Schema({
     },
     course:{
         type: String,
-        required: true
+        required: true, 
+        trim: true
     }
 });
 

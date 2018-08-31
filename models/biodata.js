@@ -6,20 +6,24 @@ var biodataSchema = new Schema({
     firstname: String,
     email: {
         type: String,
-        default: ''
+        default: '',
+        trim: true
     },
     phoneNo: {
         type: String,
-        default: ''
+        default: '',
+        trim: true
     },
     level: Number,
     address: {
         type: String,
-        default: ''
+        default: '',
+        trim: true
     },
     dob: {
         type: String,
-        default: ''
+        default: '',
+        trim: true
     }
 
 });
