@@ -15,10 +15,15 @@ exports.addCourses = async(req, res) => {
     await StudentModel.findByIdAndUpdate(req.params.id, { courses: oldCourses });
 
     var updatedUser = await StudentModel.findById(req.params.id);
+    var theCourse = updatedUser.courses[updatedUser.courses.length - 1];
+
+    console.log(theCourse);
 
     //send response
     res.status(200).json({
-        message: 'New course added successfully'
+        message: 'New course added successfully',
+        addedCourse: theCourse
+        
     });
 
 };
