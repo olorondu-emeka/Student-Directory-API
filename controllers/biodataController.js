@@ -1,6 +1,4 @@
-var mogoose = require('mongoose');
 var StudentModel = require('../models/student');
-
 
 //PATCH requests
 exports.updateBiodata = async(req, res) => {
@@ -10,8 +8,7 @@ exports.updateBiodata = async(req, res) => {
        'biodata.address': req.body.address,
        'biodata.dob': req.body.dob
     });
-   var user = await StudentModel.findById(req.params.id);
-
+  
     res.status(200).json({
         message: 'Biodata updated successfully'
     });

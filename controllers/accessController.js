@@ -1,15 +1,19 @@
-var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 var studentModel = require('../models/student');
 
 exports.getStudent = async(req, res) => {
-    const theStudent = await studentModel.findById(req.params.id);
-    console.log(req.decoded);
+    try{
+        const theStudent = await studentModel.findById(req.decoded._id);
+        console.log('logged in,', req.decoded);
         res.status(200).json({
             student: theStudent     
         });
+    
+    } catch(error){
+        console.log(error);
+    }
     
 };
 
