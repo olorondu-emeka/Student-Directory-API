@@ -91,3 +91,12 @@ exports.loginStudent = async(req, res) => {
     }
 
 };
+
+
+exports.deleteAccount = async(req, res) => {
+    await studentModel.findByIdAndRemove(req.params.id);
+
+    res.status(200).json({
+        message: 'Account deleted successfully'
+    });
+}

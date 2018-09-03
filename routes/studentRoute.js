@@ -24,6 +24,7 @@ router.patch('/dashboard/update-biodata/:id', biodataController.updateBiodata);
 
 //DELETE Requests
 router.delete('/dashboard/manage-courses/:id', coursesController.deleteCourse);
+router.delete('/dashboard/delete-account/:id', accessController.deleteAccount);
 
 
 
