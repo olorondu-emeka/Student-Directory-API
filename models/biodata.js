@@ -21,7 +21,7 @@ var biodataSchema = new Schema({
         trim: true
     },
     dob: {
-        type: String,
+        type: Date,
         default: '',
         trim: true
     }
