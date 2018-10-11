@@ -8,6 +8,11 @@ var checkAuth = require('../check-auth');
 // GET Requests
 //router.get('/biodata/:id', biodataController)
 router.get('/dashboard', checkAuth.checkLocal, checkAuth.verifyToken, accessController.getStudent);
+router.get('/:hey', (req, res) => {
+    res.status(200).json({
+        message: req.params.hey
+    });
+});
 // router.get('/dashboard/view-biodata', accessController.getStudent);
 // router.get('/dashboard/update-biodata', accessController.getStudent);
 // router.get('/dashboard/manage-courses', accessController.getStudent);

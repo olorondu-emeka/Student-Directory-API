@@ -1,4 +1,4 @@
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 var studentModel = require('../models/student');
@@ -37,13 +37,28 @@ exports.regStudent = async(req, res) => {
         }
     };
 
+    
+
     const newUser = new studentModel(student);
      const savedUser = await newUser.save();
+
+     var theUser = await studentModel.findOne({ 'credentials.matricNo': req.body.matricNo});
+
+    //generate a json web token
+    const theToken = jwt.sign({
+        matricNo: theUser.credentials.matricNo,
+        _id: theUser._id 
+    }, 
+        process.env.JWT_KEY,
+    {
+        expiresIn: "1h"
+    });
 
     //send back a response
     res.status(200).json({
         message: 'User saved successfully',
-        user: savedUser
+        user: savedUser,
+        token: theToken
     });
 
 };

@@ -4,12 +4,14 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
-var port= process.env.PORT || 8000;
+var port= process.env.PORT || 8005;
 var studentRouter = require('./routes/studentRoute');
 var startdb = require('./dbConnect');
 var cors = require('cors');
 var mongoose = require('mongoose');
 var app = express();
+
+require('dotenv').config();
 
 
 app.listen(port, () => {
